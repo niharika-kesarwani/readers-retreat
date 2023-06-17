@@ -16,6 +16,9 @@ module.exports = {
       900: "#1e3a8a",
       950: "#172554",
     },
+    boxShadow: {
+      customBoxShadow: "0px 5px 15px 5px rgba(0, 0, 0, 0.35)",
+    },
   },
   plugins: [],
 };
