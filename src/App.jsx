@@ -1,7 +1,12 @@
 import "./App.css";
+import Header from "./Layouts/Header";
 
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }
 
 export default App;
