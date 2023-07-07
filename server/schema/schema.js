@@ -25,6 +25,29 @@ const books = [
       "JavaScript: The Definitive Guide is another beginner-friendly book for anyone interested in building powerful web apps.",
   },
 ];
+const lendingHistory = [
+  {
+    id: "1",
+    bookId: "1",
+    studentId: "1",
+    lentDate: "02/06/2023",
+    returnDate: "10/06/2023",
+  },
+  {
+    id: "2",
+    bookId: "2",
+    studentId: "2",
+    lentDate: "01/07/2023",
+    returnDate: "06/07/2023",
+  },
+  {
+    id: "3",
+    bookId: "1",
+    studentId: "3",
+    lentDate: "15/06/2023",
+    returnDate: "25/06/2023",
+  },
+];
 const students = [
   {
     id: "1",
@@ -46,6 +69,29 @@ const students = [
   },
 ];
 
+const LendingHistoryType = new GraphQLObjectType({
+  name: "LendingHistory",
+  fields: () => ({
+    id: { type: GraphQLID },
+    book: {
+      type: BookType,
+      resolve(parent, args) {
+        console.log(parent);
+        return _.find(books, { id: parent.bookId });
+      },
+    },
+    student: {
+      type: StudentType,
+      resolve(parent, args) {
+        console.log(parent);
+        return _.find(students, { id: parent.studentId });
+      },
+    },
+    lentDate: { type: GraphQLString },
+    returnDate: { type: GraphQLString },
+  }),
+});
+
 const BookType = new GraphQLObjectType({
   name: "Book",
   fields: () => ({
@@ -53,6 +99,12 @@ const BookType = new GraphQLObjectType({
     title: { type: GraphQLString },
     author: { type: GraphQLString },
     description: { type: GraphQLString },
+    lendingHistory: {
+      type: new GraphQLList(LendingHistoryType),
+      resolve(parent, args) {
+        return _.filter(lendingHistory, { bookId: parent.id });
+      },
+    },
   }),
 });
 
@@ -63,6 +115,12 @@ const StudentType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     phoneNo: { type: GraphQLString },
+    lendingHistory: {
+      type: new GraphQLList(LendingHistoryType),
+      resolve(parent, args) {
+        return _.filter(lendingHistory, { studentId: parent.id });
+      },
+    },
   }),
 });
 
@@ -93,6 +151,12 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(StudentType),
       resolve(parent, args) {
         return _.filter(students, {});
+      },
+    },
+    bookLendingHistory: {
+      type: new GraphQLList(LendingHistoryType),
+      resolve(parent, args) {
+        return _.filter(lendingHistory, {});
       },
     },
   },
