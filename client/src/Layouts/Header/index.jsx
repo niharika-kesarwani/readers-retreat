@@ -18,8 +18,8 @@ const Header = () => {
       <h1 className="font-semibold uppercase">reader's retreat</h1>
       <nav className="max-[400px]:hidden">
         <UnderActionLink actionText="Home" actionLink="/" />
-        <UnderActionLink actionText="Students" actionLink="/" />
-        <UnderActionLink actionText="Books" actionLink="/" />
+        <UnderActionLink actionText="Students" actionLink="/students" />
+        <UnderActionLink actionText="Books" actionLink="/books" />
       </nav>
       <nav className="relative min-[400px]:hidden">
         <button
