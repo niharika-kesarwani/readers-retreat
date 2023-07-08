@@ -10,7 +10,7 @@ const IconActionBtn = ({
     <button
       type={actionType}
       onClick={actionHandler}
-      className={`${className} h-8 w-8 rounded-full p-1 text-sm capitalize text-800 duration-150 hover:bg-100 active:bg-200`}
+      className={`${className} h-8 w-8 rounded-full bg-50 p-1 text-sm capitalize  text-950 duration-150 hover:bg-100 active:bg-200`}
     >
       {actionText}
     </button>

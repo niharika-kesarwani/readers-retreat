@@ -14,6 +14,8 @@ import {
   InputTextVisibility,
 } from "./Inputs";
 
+import ModalProvider from "./ModalProvider";
+
 export {
   ContainedActionBtn,
   IconActionBtn,
@@ -25,4 +27,5 @@ export {
   InputTextLabel,
   InputTextVariant,
   InputTextVisibility,
+  ModalProvider,
 };
