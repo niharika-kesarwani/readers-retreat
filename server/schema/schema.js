@@ -1,5 +1,8 @@
 const graphql = require("graphql");
 const _ = require("lodash");
+const Books = require("../models/books");
+const Students = require("../models/students");
+const LendingHistory = require("../models/lendingHistory");
 
 const {
   GraphQLObjectType,
@@ -8,69 +11,6 @@ const {
   GraphQLID,
   GraphQLList,
 } = graphql;
-
-// const books = [
-//   {
-//     id: "1",
-//     title: "Eloquent JavaScript",
-//     author: "Marijn Haverbeke",
-//     description:
-//       "This is a book about JavaScript, programming, and the wonders of the digital.",
-//   },
-//   {
-//     id: "2",
-//     title: "JavaScript: The Definitive Guide",
-//     author: "David Flanagan",
-//     description:
-//       "JavaScript: The Definitive Guide is another beginner-friendly book for anyone interested in building powerful web apps.",
-//   },
-// ];
-// const lendingHistory = [
-//   {
-//     id: "1",
-//     bookId: "1",
-//     studentId: "1",
-//     lentDate: "02/06/2023",
-//     returnDate: "10/06/2023",
-//   },
-//   {
-//     id: "2",
-//     bookId: "2",
-//     studentId: "2",
-//     lentDate: "01/07/2023",
-//     returnDate: "06/07/2023",
-//   },
-//   {
-//     id: "3",
-//     bookId: "1",
-//     studentId: "3",
-//     lentDate: "15/06/2023",
-//     returnDate: "25/06/2023",
-//   },
-// ];
-// const students = [
-//   {
-//     id: "1",
-//     rollNumber: 1,
-//     name: "Niharika Kesarwani",
-//     email: "niharikak@gmail.com",
-//     phoneNo: "1234567890",
-//   },
-//   {
-//     id: "2",
-//     rollNumber: 2,
-//     name: "Vivek Bhatt",
-//     email: "vivekbhatt@gmail.com",
-//     phoneNo: "1234567890",
-//   },
-//   {
-//     id: "3",
-//     rollNumber: 3,
-//     name: "Shraddha Vishwakarma",
-//     email: "shraddhav@gmail.com",
-//     phoneNo: "1234567890",
-//   },
-// ];
 
 const LendingHistoryType = new GraphQLObjectType({
   name: "LendingHistory",
@@ -99,7 +39,7 @@ const BookType = new GraphQLObjectType({
   name: "Book",
   fields: () => ({
     id: { type: GraphQLID },
-    title: { type: GraphQLString },
+    name: { type: GraphQLString },
     author: { type: GraphQLString },
     description: { type: GraphQLString },
     lendingHistory: {
@@ -115,7 +55,7 @@ const StudentType = new GraphQLObjectType({
   name: "Student",
   fields: () => ({
     id: { type: GraphQLID },
-    rollNumber: { type: GraphQLString },
+    rollNumber: { type: GraphQLID },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     phoneNo: { type: GraphQLString },
@@ -166,6 +106,68 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
+const Mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addBook: {
+      type: BookType,
+      args: {
+        name: { type: GraphQLString },
+        author: { type: GraphQLString },
+        description: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        const book = new Books({
+          name: args.name,
+          author: args.author,
+          description: args.description,
+        });
+        return book.save();
+      },
+    },
+
+    addStudent: {
+      type: StudentType,
+      args: {
+        rollNumber: { type: GraphQLID },
+        name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        phoneNo: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        const student = new Students({
+          rollNumber: args.rollNumber,
+          name: args.name,
+          email: args.email,
+          phoneNo: args.phoneNo,
+        });
+        return student.save();
+      },
+    },
+
+    addLendingHistory: {
+      type: LendingHistoryType,
+      args: {
+        bookId: { type: GraphQLID },
+        studentRoll: { type: GraphQLID },
+        lentDate: { type: GraphQLString },
+        returnDate: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        const lendingHistory = new LendingHistory({
+          bookId: args.bookId,
+          studentRoll: args.studentRoll,
+          lentDate: args.lentDate,
+          returnDate: args.returnDate,
+        });
+        console.log(lendingHistory);
+        return lendingHistory.save();
+      },
+    },
+  },
+});
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation: Mutation,
 });
