@@ -3,6 +3,7 @@ const _ = require("lodash");
 const Books = require("../models/books");
 const Students = require("../models/students");
 const LendingHistory = require("../models/lendingHistory");
+const students = require("../models/students");
 
 const {
   GraphQLObjectType,
@@ -10,6 +11,7 @@ const {
   GraphQLSchema,
   GraphQLID,
   GraphQLList,
+  GraphQLNonNull,
 } = graphql;
 
 const LendingHistoryType = new GraphQLObjectType({
@@ -19,15 +21,13 @@ const LendingHistoryType = new GraphQLObjectType({
     book: {
       type: BookType,
       resolve(parent, args) {
-        // console.log(parent);
-        // return _.find(books, { id: parent.bookId });
+        return Books.findById(parent.bookId);
       },
     },
     student: {
       type: StudentType,
       resolve(parent, args) {
-        // console.log(parent);
-        // return _.find(students, { id: parent.studentId });
+        return Students.findOne({ rollNumber: parent.studentRoll });
       },
     },
     lentDate: { type: GraphQLString },
@@ -45,7 +45,7 @@ const BookType = new GraphQLObjectType({
     lendingHistory: {
       type: new GraphQLList(LendingHistoryType),
       resolve(parent, args) {
-        // return _.filter(lendingHistory, { bookId: parent.id });
+        return LendingHistory.find({ bookId: parent.id });
       },
     },
   }),
@@ -55,14 +55,14 @@ const StudentType = new GraphQLObjectType({
   name: "Student",
   fields: () => ({
     id: { type: GraphQLID },
-    rollNumber: { type: GraphQLID },
+    rollNumber: { type: GraphQLString },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     phoneNo: { type: GraphQLString },
     lendingHistory: {
       type: new GraphQLList(LendingHistoryType),
       resolve(parent, args) {
-        // return _.filter(lendingHistory, { studentId: parent.id });
+        return LendingHistory.find({ studentRoll: parent.rollNumber });
       },
     },
   }),
@@ -75,32 +75,33 @@ const RootQuery = new GraphQLObjectType({
       type: BookType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        // return _.find(books, { id: args.id });
+        return Books.findById(args.id);
       },
     },
     student: {
       type: StudentType,
-      args: { id: { type: GraphQLID } },
+      args: { rollNumber: { type: GraphQLString } },
       resolve(parent, args) {
-        // return _.find(students, { id: args.id });
+        console.log(args);
+        return Students.findOne({ rollNumber: args.rollNumber });
       },
     },
     books: {
       type: new GraphQLList(BookType),
       resolve(parent, args) {
-        // return _.filter(books, {});
+        return Books.find({});
       },
     },
     students: {
       type: new GraphQLList(StudentType),
       resolve(parent, args) {
-        // return _.filter(students, {});
+        return Students.find({});
       },
     },
     bookLendingHistory: {
       type: new GraphQLList(LendingHistoryType),
       resolve(parent, args) {
-        // return _.filter(lendingHistory, {});
+        return LendingHistory.find({});
       },
     },
   },
@@ -112,9 +113,9 @@ const Mutation = new GraphQLObjectType({
     addBook: {
       type: BookType,
       args: {
-        name: { type: GraphQLString },
-        author: { type: GraphQLString },
-        description: { type: GraphQLString },
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        author: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parent, args) {
         const book = new Books({
@@ -129,10 +130,10 @@ const Mutation = new GraphQLObjectType({
     addStudent: {
       type: StudentType,
       args: {
-        rollNumber: { type: GraphQLID },
-        name: { type: GraphQLString },
-        email: { type: GraphQLString },
-        phoneNo: { type: GraphQLString },
+        rollNumber: { type: new GraphQLNonNull(GraphQLString) },
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        phoneNo: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parent, args) {
         const student = new Students({
@@ -148,10 +149,10 @@ const Mutation = new GraphQLObjectType({
     addLendingHistory: {
       type: LendingHistoryType,
       args: {
-        bookId: { type: GraphQLID },
-        studentRoll: { type: GraphQLID },
-        lentDate: { type: GraphQLString },
-        returnDate: { type: GraphQLString },
+        bookId: { type: new GraphQLNonNull(GraphQLID) },
+        studentRoll: { type: new GraphQLNonNull(GraphQLString) },
+        lentDate: { type: new GraphQLNonNull(GraphQLString) },
+        returnDate: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parent, args) {
         const lendingHistory = new LendingHistory({
@@ -160,7 +161,6 @@ const Mutation = new GraphQLObjectType({
           lentDate: args.lentDate,
           returnDate: args.returnDate,
         });
-        console.log(lendingHistory);
         return lendingHistory.save();
       },
     },
