@@ -3,7 +3,6 @@ const _ = require("lodash");
 const Books = require("../models/books");
 const Students = require("../models/students");
 const LendingHistory = require("../models/lendingHistory");
-const students = require("../models/students");
 
 const {
   GraphQLObjectType,
@@ -162,6 +161,74 @@ const Mutation = new GraphQLObjectType({
           returnDate: args.returnDate,
         });
         return lendingHistory.save();
+      },
+    },
+
+    deleteBook: {
+      type: BookType,
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Books.findByIdAndRemove(args.id);
+      },
+    },
+
+    deleteStudent: {
+      type: StudentType,
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Students.findByIdAndRemove(args.id);
+      },
+    },
+
+    updateBook: {
+      type: BookType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLID),
+        },
+        name: { type: GraphQLString },
+        author: { type: GraphQLString },
+        description: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Books.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              name: args.name,
+              author: args.author,
+              description: args.description,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+
+    updateStudent: {
+      type: StudentType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLID),
+        },
+        rollNumber: { type: GraphQLString },
+        name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        phoneNo: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Students.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              rollNumber: args.rollNumber,
+              name: args.name,
+              email: args.email,
+              phoneNo: args.phoneNo,
+            },
+          },
+          { new: true }
+        );
       },
     },
   },
