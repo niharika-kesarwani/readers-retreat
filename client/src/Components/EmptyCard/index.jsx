@@ -1,7 +1,12 @@
 import React from "react";
+import { ContainedActionBtn } from "../Actions";
+import { useNavigate } from "react-router-dom";
 
 const EmptyCard = (props) => {
-  const { emptyCardUrl, emptyCardTitle, emptyCardDescription } = props;
+  const { navigate } = useNavigate();
+  const { emptyCardUrl, emptyCardTitle, emptyCardDescription, addBtnText } =
+    props;
+
   return (
     <div className="m-auto flex flex-col gap-6">
       <div className="">
@@ -10,6 +15,10 @@ const EmptyCard = (props) => {
       <div className="flex justify-center">
         <span className="text-2xl">{emptyCardDescription}</span>
       </div>
+      <ContainedActionBtn
+        onClick={() => navigate("/")}
+        actionText={addBtnText}
+      />
     </div>
   );
 };
