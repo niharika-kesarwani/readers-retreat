@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { Modal } from "@mui/material";
 import { IconActionBtn } from "../Actions";
