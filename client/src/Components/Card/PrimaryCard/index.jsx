@@ -11,9 +11,9 @@ const PrimaryCard = (props) => {
     <article className={classes}>
       <span className="primary-card-index absolute left-0 top-0 flex h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#000]"></span>
       <span className="absolute left-0 top-0 flex h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#000] pl-10 pt-10 text-xl text-50">
-        {props.id}
+        {props.rollNumber}
       </span>
-      <h3 className="text-xl">{TruncUtil(props.studentName, 12)}</h3>
+      <h3 className="text-xl">{TruncUtil(props.name, 12)}</h3>
     </article>
   );
 };
