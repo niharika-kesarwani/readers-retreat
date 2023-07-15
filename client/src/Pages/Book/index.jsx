@@ -5,7 +5,6 @@ import { getBooksQuery } from "../../queries/queries";
 import "./Book.css";
 import PageContainer from "../../Layouts/PageContainer";
 import { PrimaryCard, EmptyCard, Loader } from "../../Components";
-import { PrimaryCard, EmptyCard } from "../../Components";
 import InputSearch from "../../Components/Inputs/InputSearch";
 
 const Book = () => {
@@ -42,7 +41,6 @@ const Book = () => {
       <div className="flex w-full flex-col gap-8 px-4 py-4 md:flex-row xl:px-0">
         <ul
           className={
-<<<<<<< HEAD
             data.books.length == 0 ? `flex w-full` : `card-container w-full`
           }
         >
@@ -50,24 +48,6 @@ const Book = () => {
             data.books.map((currentBook) => {
               return <PrimaryCard key={currentBook.id} {...currentBook} />;
             })
-=======
-            data.books.length == 0
-              ? `flex w-full`
-              : `card-container w-full justify-items-center`
-          }
-        >
-          {data.books.length !== 0 ? (
-            booksData.length ? (
-              booksData.map((currentBook) => {
-                return <PrimaryCard key={currentBook.id} {...currentBook} />;
-              })
-            ) : (
-              <p className="text-xl">
-                No Book with title/author/description of{" "}
-                <strong>{inputText}</strong> found
-              </p>
-            )
->>>>>>> f672abf493e6fc02c6c848cfbca87cc6ee6babbc
           ) : (
             <EmptyCard
               emptyCardTitle="bookEmpty"

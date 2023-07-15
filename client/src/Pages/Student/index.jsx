@@ -5,7 +5,6 @@ import { getStudentsQuery } from "../../queries/queries";
 import "./Student.css";
 import PageContainer from "../../Layouts/PageContainer";
 import { PrimaryCard, EmptyCard, Loader } from "../../Components";
-import { PrimaryCard, EmptyCard } from "../../Components";
 import InputSearch from "../../Components/Inputs/InputSearch";
 
 const Student = () => {
@@ -41,7 +40,6 @@ const Student = () => {
       <div className="flex w-full flex-col gap-8 px-4 py-4 md:flex-row xl:px-0">
         <ul
           className={
-<<<<<<< HEAD
             data.students.length == 0 ? `flex w-full` : `card-container w-full`
           }
         >
@@ -55,29 +53,6 @@ const Student = () => {
                 />
               );
             })
-=======
-            data.students.length == 0
-              ? `flex w-full`
-              : `card-container w-full justify-items-center`
-          }
-        >
-          {data.students.length !== 0 ? (
-            studentsData.length ? (
-              studentsData.map((currentStudent) => {
-                return (
-                  <PrimaryCard
-                    key={currentStudent.id}
-                    {...currentStudent}
-                    isStudent
-                  />
-                );
-              })
-            ) : (
-              <p className="text-xl">
-                No Student with name/email of <strong>{inputText}</strong> found
-              </p>
-            )
->>>>>>> f672abf493e6fc02c6c848cfbca87cc6ee6babbc
           ) : (
             <EmptyCard
               emptyCardTitle="studentEmpty"
