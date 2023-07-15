@@ -8,6 +8,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { BookForm, StudentForm } from "../../Form";
 import { useMutation } from "@apollo/client";
 import {
+  deleteBookMutation,
+  getBooksQuery,
   deleteStudentMutation,
   getStudentsQuery,
 } from "../../../queries/queries";
@@ -24,6 +26,8 @@ const PrimaryCard = (props) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const editOpen = () => setIsEditOpen(true);
   const editClose = () => setIsEditOpen(false);
+
+  const [deleteBook] = useMutation(deleteBookMutation);
 
   const classes =
     "primary-card rounded-lg p-4 bg-[#8EC5FC] relative overflow-hidden flex justify-center items-center min-w-[296px] max-w-[296px] h-full cursor-pointer " +
@@ -83,7 +87,20 @@ const PrimaryCard = (props) => {
               >
                 <DeleteIcon sx={{ fontSize: "16px" }} />
               </button>
-            ) : null}
+            ) : (
+              <button
+                className="bottom-[10px] right-[10px] flex h-9 w-9 items-center justify-center rounded-full bg-600 p-2 text-50 transition-all hover:bg-50 hover:text-950 active:scale-95"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  deleteBook({
+                    variables: { deleteBookId: props.id },
+                    refetchQueries: [{ query: getBooksQuery }],
+                  });
+                }}
+              >
+                <DeleteIcon sx={{ fontSize: "16px" }} />
+              </button>
+            )}
           </div>
         </article>
       }
