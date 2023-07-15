@@ -15,6 +15,7 @@ import {
 } from "./Inputs";
 
 import ModalProvider from "./ModalProvider";
+import { PrimaryCard } from "./Card";
 
 export {
   ContainedActionBtn,
@@ -28,4 +29,5 @@ export {
   InputTextVariant,
   InputTextVisibility,
   ModalProvider,
+  PrimaryCard,
 };
