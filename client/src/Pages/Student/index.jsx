@@ -21,7 +21,13 @@ const Student = () => {
       <div className="flex w-full flex-col gap-8 px-4 py-4 md:flex-row xl:px-0">
         <ul className="card-container w-full">
           {data.students.map((currentStudent) => {
-            return <PrimaryCard key={currentStudent.id} {...currentStudent} />;
+            return (
+              <PrimaryCard
+                key={currentStudent.id}
+                {...currentStudent}
+                isStudent
+              />
+            );
           })}
         </ul>
       </div>
