@@ -22,5 +22,3 @@ const PrimaryCard = (props) => {
 };
 
 export default PrimaryCard;
-
-// 80px =>
