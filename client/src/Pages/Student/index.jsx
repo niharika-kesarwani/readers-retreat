@@ -1,21 +1,27 @@
 import React from "react";
+import { useQuery } from "@apollo/client";
+import { graphql } from "@apollo/client/react/hoc";
+import { getStudentsQuery } from "../../queries/queries";
+
 import "./Student.css";
 import PageContainer from "../../Layouts/PageContainer";
 import { PrimaryCard } from "../../Components";
 
 const Student = () => {
-  const studentData = [
-    { id: "1", studentName: "Vivek Bhatt", bgColor: "#8EC5FC" },
-    { id: "2", studentName: "Niharika Kesarwani", bgColor: "#E0C3FC" },
-    { id: "3", studentName: "Pranita Fulsundar", bgColor: "#80D0C7" },
-    { id: "4", studentName: "Abhishek Gupta", bgColor: "#8EC5FC" },
-    { id: "5", studentName: "Shraddha Vishwakarma", bgColor: "#8EC5FC" },
-  ];
+  const { data, loading, error } = useQuery(getStudentsQuery);
+
+  if (loading) {
+    return <div>Loading students... </div>;
+  }
+
+  if (error) {
+    return <div>Something went wrong!</div>;
+  }
   return (
     <PageContainer className="flex">
       <div className="flex w-full flex-col gap-8 px-4 py-4 md:flex-row xl:px-0">
         <ul className="card-container w-full">
-          {studentData.map((currentStudent) => {
+          {data.students.map((currentStudent) => {
             return <PrimaryCard key={currentStudent.id} {...currentStudent} />;
           })}
         </ul>
@@ -24,4 +30,4 @@ const Student = () => {
   );
 };
 
-export default Student;
+export default graphql(getStudentsQuery)(Student);
