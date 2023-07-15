@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import {
   InputTextLabel,
   InputTextVariant,
@@ -49,12 +50,14 @@ const BookForm = (props) => {
         },
         refetchQueries: [{ query: getBooksQuery }],
       });
+      toast.success(`Updated ${bookData.bookTitle} successfully!`);
       props.closeEdit();
     } else {
       addBook({
         variables: bookData,
         refetchQueries: [{ query: getBooksQuery }],
       });
+      toast.success(`Added ${bookData.bookTitle} successfully!`);
       closeBookForm();
     }
   };
@@ -97,7 +100,7 @@ const BookForm = (props) => {
       </div>
       <div className="flex gap-3">
         <ContainedActionBtn
-          actionText="ADD BOOK"
+          actionText={`${isEditBook ? "EDIT" : "ADD"} BOOK`}
           className="basis-1/2"
           actionType="submit"
         />

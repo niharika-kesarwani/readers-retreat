@@ -4,7 +4,7 @@ import LoaderLottie from "../../../Asset/Lottie/Loader/Loader.json";
 
 const Loader = () => {
   return (
-    <div className="h-[300px] w-[300px]">
+    <div className="mx-auto h-[300px] w-[300px]">
       <Lottie animationData={LoaderLottie} loop={true} />
     </div>
   );

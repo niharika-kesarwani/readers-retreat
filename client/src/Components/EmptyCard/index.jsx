@@ -16,7 +16,7 @@ const EmptyCard = (props) => {
         <span className="text-2xl">{emptyCardDescription}</span>
       </div>
       <ContainedActionBtn
-        onClick={() => navigate("/")}
+        actionHandler={() => navigate("/")}
         actionText={addBtnText}
       />
     </div>

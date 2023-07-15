@@ -4,7 +4,7 @@ import { graphql } from "@apollo/client/react/hoc";
 import { getBooksQuery } from "../../queries/queries";
 import "./Book.css";
 import PageContainer from "../../Layouts/PageContainer";
-import { PrimaryCard, EmptyCard } from "../../Components";
+import { PrimaryCard, EmptyCard, Loader } from "../../Components";
 import InputSearch from "../../Components/Inputs/InputSearch";
 
 const Book = () => {
@@ -25,7 +25,11 @@ const Book = () => {
   }, [data, inputText]);
 
   if (loading) {
-    return <div>Loading books... </div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {

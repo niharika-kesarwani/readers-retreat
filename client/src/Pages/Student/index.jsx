@@ -4,7 +4,7 @@ import { graphql } from "@apollo/client/react/hoc";
 import { getStudentsQuery } from "../../queries/queries";
 import "./Student.css";
 import PageContainer from "../../Layouts/PageContainer";
-import { PrimaryCard, EmptyCard } from "../../Components";
+import { PrimaryCard, EmptyCard, Loader } from "../../Components";
 import InputSearch from "../../Components/Inputs/InputSearch";
 
 const Student = () => {
@@ -24,7 +24,11 @@ const Student = () => {
   }, [data, inputText]);
 
   if (loading) {
-    return <div>Loading students... </div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {

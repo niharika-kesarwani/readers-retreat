@@ -5,7 +5,7 @@ const InputSearch = (props) => {
   const { setInputText, searchName } = props;
 
   return (
-    <div className="flex max-w-[500px] items-center gap-2 rounded-md border-2 border-500 p-2 px-4">
+    <div className="flex max-w-[500px] items-center gap-2 rounded-md border-2 border-500 bg-[#fff] p-2 px-4">
       <SearchIcon sx={{ color: "#5271ff" }} />
       <input
         type="text"

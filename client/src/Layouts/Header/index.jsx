@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import UnderActionLink from "../../Components/Actions/UnderActionLink";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import TextActionLink from "../../Components/Actions/TextActionLink";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
@@ -16,7 +18,12 @@ const Header = () => {
   return (
     <header className="flex h-[8vh] border-b p-4 xl:px-0">
       <div className="mx-auto flex w-full max-w-[1280px] justify-between">
-        <h1 className="font-semibold uppercase">reader's retreat</h1>
+        <h1
+          onClick={() => navigate("/")}
+          className="text-xl font-semibold uppercase hover:cursor-pointer"
+        >
+          reader's retreat
+        </h1>
         <nav className="max-[400px]:hidden">
           <UnderActionLink actionText="Home" actionLink="/" />
           <UnderActionLink actionText="Students" actionLink="/students" />

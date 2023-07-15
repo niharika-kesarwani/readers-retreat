@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./Layouts/Header";
 import { Home, Student, Book } from "./Pages";
+import { Toaster } from "react-hot-toast";
 
 const client = new ApolloClient({
   uri: "https://readers-retreat-server.onrender.com/graphql/",
@@ -12,7 +13,13 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div>
+      <div className="">
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          containerStyle={{ top: "10%" }}
+          toastOptions={{ style: { maxWidth: 500 } }}
+        />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

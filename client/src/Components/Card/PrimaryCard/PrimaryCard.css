@@ -1,3 +1,7 @@
+.primary-card:hover .overlap-text {
+  z-index: 20;
+}
+
 @media (min-width: 656px) {
   .primary-card-index {
     transition: transform 0.5s;
