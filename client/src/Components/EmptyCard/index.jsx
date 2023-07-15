@@ -1,7 +1,6 @@
 import React from "react";
-
-import { ContainedActionBtn } from "../Actions";
 import { useNavigate } from "react-router-dom";
+import { ContainedActionBtn } from "../Actions";
 
 const EmptyCard = (props) => {
   const { navigate } = useNavigate();
@@ -17,7 +16,7 @@ const EmptyCard = (props) => {
         <span className="text-2xl">{emptyCardDescription}</span>
       </div>
       <ContainedActionBtn
-        onClick={() => navigate("/")}
+        actionHandler={() => navigate("/")}
         actionText={addBtnText}
       />
     </div>

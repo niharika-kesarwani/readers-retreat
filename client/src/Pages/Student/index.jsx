@@ -25,7 +25,7 @@ const Student = () => {
 
   if (loading) {
     return (
-      <div className="w-full">
+      <div>
         <Loader />
       </div>
     );

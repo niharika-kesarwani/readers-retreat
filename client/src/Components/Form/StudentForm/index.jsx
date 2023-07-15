@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import toast from "react-hot-toast";
 import {
   InputTextLabel,
   InputTextVariant,
@@ -51,12 +51,14 @@ const StudentForm = (props) => {
         },
         refetchQueries: [{ query: getStudentsQuery }],
       });
+      toast.success(`Updated ${studentData.studentName} successfully!`);
       props.closeEdit();
     } else {
       addStudent({
         variables: studentData,
         refetchQueries: [{ query: getStudentsQuery }],
       });
+      toast.success(`Added ${studentData.studentName} successfully!`);
       closeStudentForm();
     }
   };
