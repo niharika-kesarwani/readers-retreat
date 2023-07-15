@@ -2,7 +2,6 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { graphql } from "@apollo/client/react/hoc";
 import { getStudentsQuery } from "../../queries/queries";
-
 import "./Student.css";
 import PageContainer from "../../Layouts/PageContainer";
 import { PrimaryCard } from "../../Components";
