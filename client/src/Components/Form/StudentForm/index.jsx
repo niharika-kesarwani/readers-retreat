@@ -6,9 +6,13 @@ import {
   ContainedActionBtn,
   OutlinedActionBtn,
 } from "../../../Components";
+import { addStudentMutation, getStudentsQuery } from "../../../queries/queries";
+import { useMutation } from "@apollo/client";
 
 const StudentForm = (props) => {
+  const [addStudent] = useMutation(addStudentMutation);
   const { closeStudentForm } = props;
+
   // STUDENT INPUT DATA:
   const [studentData, setStudentData] = useState({
     studentName: props?.isEditStudent ? props.name : "",
@@ -33,6 +37,10 @@ const StudentForm = (props) => {
     if (props.isEditStudent) {
       props.closeEdit();
     } else {
+      addStudent({
+        variables: studentData,
+        refetchQueries: [{ query: getStudentsQuery }],
+      });
       closeStudentForm();
     }
   };

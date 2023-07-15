@@ -77,21 +77,42 @@ const PrimaryCard = (props) => {
     >
       <div className="flex flex-col gap-3 p-4">
         <div className="flex justify-between rounded-md bg-100 p-2">
-          <span>ID</span>
-          <span className="capitalize">{props.rollNumber}</span>
-        </div>
-        <div className="flex justify-between rounded-md bg-100 p-2">
           <span>Name</span>
           <span className="capitalize">{props.name}</span>
         </div>
-        <div className="flex justify-between rounded-md bg-100 p-2">
-          <span>Email</span>
-          <span className="capitalize">{props.email}</span>
-        </div>
-        <div className="flex justify-between rounded-md bg-100 p-2">
-          <span>Phone Number</span>
-          <span className="capitalize">{props.phoneNo}</span>
-        </div>
+        {isStudent ? (
+          <div className="flex justify-between rounded-md bg-100 p-2">
+            <span>ID</span>
+            <span className="capitalize">{props.rollNumber}</span>
+          </div>
+        ) : (
+          <div className="flex justify-between rounded-md bg-100 p-2">
+            <span>Author</span>
+            <span className="capitalize">{props.author}</span>
+          </div>
+        )}
+        {isStudent ? (
+          <div className="flex justify-between rounded-md bg-100 p-2">
+            <span>Email</span>
+            <span className="capitalize">{props.email}</span>
+          </div>
+        ) : (
+          <div className="flex justify-between rounded-md bg-100 p-2">
+            <span>Description</span>
+            <span className="capitalize">{props.description}</span>
+          </div>
+        )}
+        {isStudent ? (
+          <div className="flex justify-between rounded-md bg-100 p-2">
+            <span>Phone Number</span>
+            <span className="capitalize">{props.phoneNo}</span>
+          </div>
+        ) : (
+          <div className="flex justify-between rounded-md bg-100 p-2">
+            <span>Book Code</span>
+            <span className="capitalize">{props.id}</span>
+          </div>
+        )}
       </div>
     </ModalProvider>
   );

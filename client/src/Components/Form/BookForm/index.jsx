@@ -5,9 +5,13 @@ import {
   ContainedActionBtn,
   OutlinedActionBtn,
 } from "../../../Components";
+import { addBookMutation, getBooksQuery } from "../../../queries/queries";
+import { useMutation } from "@apollo/client";
 
 const BookForm = (props) => {
+  const [addBook, { data, loading, error }] = useMutation(addBookMutation);
   const { isEditBook, closeBookForm } = props;
+
   // BOOK INPUT DATA:
   const [bookData, setBookData] = useState({
     bookTitle: props?.isEditBook ? props.name : "",
@@ -28,10 +32,14 @@ const BookForm = (props) => {
   const handleAddBookSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    console.log(bookData);
+    console.log("here", { bookData });
     if (isEditBook) {
       props.closeEdit();
     } else {
+      addBook({
+        variables: bookData,
+        refetchQueries: [{ query: getBooksQuery }],
+      });
       closeBookForm();
     }
   };

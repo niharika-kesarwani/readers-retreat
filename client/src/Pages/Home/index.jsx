@@ -1,32 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import {
-  SecondaryContainer,
-  ModalProvider,
-  InputTextLabel,
-  InputTextVariant,
-  ContainedActionBtn,
-  OutlinedActionBtn,
-  IconActionBtn,
-  BookForm,
-  StudentForm,
-} from "../../Components";
+import { ModalProvider, BookForm, StudentForm } from "../../Components";
 import PageContainer from "../../Layouts/PageContainer";
 import StudentIcon from "../../Asset/Home/StudentIcon.svg";
 import BookIcon from "../../Asset/Home/BookIcon.svg";
-import {
-  addBookMutation,
-  addStudentMutation,
-  getBooksQuery,
-  getStudentsQuery,
-} from "../../queries/queries";
 
 const Home = () => {
-  const [addBook, { data, loading, error }] = useMutation(addBookMutation);
-  const [addStudent] = useMutation(addStudentMutation);
-
   // ADD STUDENT MODAL:
   const [isAddStudentModalOpen, setIsAddStudentModalOpen] = useState(false);
   const openAddStudentModal = () => setIsAddStudentModalOpen(true);
@@ -36,60 +15,6 @@ const Home = () => {
   const [isAddBookModalOpen, setIsAddBookModalOpen] = useState(false);
   const openAddBookModal = () => setIsAddBookModalOpen(true);
   const closeAddBookModal = () => setIsAddBookModalOpen(false);
-  
-  // STUDENT INPUT DATA:
-  const [studentData, setStudentData] = useState({
-    studentName: "",
-    studentId: "",
-    studentEmail: "",
-    studentNumber: "",
-  });
-
-  // BOOK INPUT DATA:
-  const [bookData, setBookData] = useState({
-    bookTitle: "",
-    bookAuthor: "",
-    bookDescription: "",
-    bookCode: "",
-  });
-
-  // HANDLE STUDENT DATA:
-  const handleStudentData = (event) => {
-    const { name, value } = event.target;
-    setStudentData((prevStudentData) => {
-      return { ...prevStudentData, [name]: value };
-    });
-  };
-
-  // HANDLE BOOK DATA:
-  const handleBookData = (event) => {
-    const { name, value } = event.target;
-    setBookData((prevBookData) => {
-      return { ...prevBookData, [name]: value };
-    });
-  };
-
-  // HANDLE ADD STUDENT:
-  const handleAddStudentSubmit = (event) => {
-    event.preventDefault();
-    console.log(studentData);
-    closeAddStudentModal();
-    addStudent({
-      variables: studentData,
-      refetchQueries: [{ query: getStudentsQuery }],
-    });
-  };
-
-  // HANDLE ADD BOOK:
-  const handleAddBookSubmit = (event) => {
-    event.preventDefault();
-    console.log(bookData);
-    closeAddBookModal();
-    addBook({
-      variables: bookData,
-      refetchQueries: [{ query: getBooksQuery }],
-    });
-  };
 
   return (
     <PageContainer className="flex">
