@@ -23,4 +23,45 @@ const getStudentsQuery = gql`
   }
 `;
 
-export { getBooksQuery, getStudentsQuery };
+const addBookMutation = gql`
+  mutation (
+    $bookTitle: String!
+    $bookAuthor: String!
+    $bookDescription: String!
+  ) {
+    addBook(
+      name: $bookTitle
+      author: $bookAuthor
+      description: $bookDescription
+    ) {
+      id
+      name
+      author
+      description
+    }
+  }
+`;
+
+const addStudentMutation = gql`
+  mutation (
+    $studentId: String!
+    $studentName: String!
+    $studentEmail: String!
+    $studentNumber: String!
+  ) {
+    addStudent(
+      rollNumber: $studentId
+      name: $studentName
+      email: $studentEmail
+      phoneNo: $studentNumber
+    ) {
+      id
+      rollNumber
+      name
+      email
+      phoneNo
+    }
+  }
+`;
+
+export { getBooksQuery, getStudentsQuery, addBookMutation, addStudentMutation };

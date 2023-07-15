@@ -5,7 +5,7 @@ import Header from "./Layouts/Header";
 import { Home, Student, Book } from "./Pages";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql/",
+  uri: "https://readers-retreat-server.onrender.com/graphql/",
   cache: new InMemoryCache(),
 });
 
