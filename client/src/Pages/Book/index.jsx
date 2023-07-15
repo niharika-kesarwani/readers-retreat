@@ -50,6 +50,7 @@ const Book = () => {
             })
           ) : (
             <EmptyCard
+              addBtnText="Add Books"
               emptyCardTitle="bookEmpty"
               emptyCardDescription="No Book Data"
               emptyCardUrl="https://res.cloudinary.com/duqsyuriy/image/upload/v1689418626/NoBook_m0phgt.svg"
