@@ -4,13 +4,17 @@ import { graphql } from "@apollo/client/react/hoc";
 import { getStudentsQuery } from "../../queries/queries";
 import "./Student.css";
 import PageContainer from "../../Layouts/PageContainer";
-import { PrimaryCard, EmptyCard } from "../../Components";
+import { PrimaryCard, EmptyCard, Loader } from "../../Components";
 
 const Student = () => {
   const { data, loading, error } = useQuery(getStudentsQuery);
 
   if (loading) {
-    return <div>Loading students... </div>;
+    return (
+      <div className="w-full">
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {

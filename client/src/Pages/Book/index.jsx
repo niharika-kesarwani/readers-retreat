@@ -4,13 +4,17 @@ import { graphql } from "@apollo/client/react/hoc";
 import { getBooksQuery } from "../../queries/queries";
 import "./Book.css";
 import PageContainer from "../../Layouts/PageContainer";
-import { PrimaryCard, EmptyCard } from "../../Components";
+import { PrimaryCard, EmptyCard, Loader } from "../../Components";
 
 const Book = () => {
   const { data, loading, error } = useQuery(getBooksQuery);
 
   if (loading) {
-    return <div>Loading books... </div>;
+    return (
+      <div className="w-full">
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
