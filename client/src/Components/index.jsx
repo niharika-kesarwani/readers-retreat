@@ -17,6 +17,8 @@ import {
 import ModalProvider from "./ModalProvider";
 import { PrimaryCard } from "./Card";
 import { BookForm, StudentForm } from "./Form";
+import { Loader } from "./Lottie";
+import EmptyCard from "./EmptyCard/index";
 
 export {
   ContainedActionBtn,
@@ -33,4 +35,6 @@ export {
   PrimaryCard,
   BookForm,
   StudentForm,
+  Loader,
+  EmptyCard,
 };
