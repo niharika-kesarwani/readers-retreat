@@ -16,6 +16,7 @@ import {
 
 import ModalProvider from "./ModalProvider";
 import { PrimaryCard } from "./Card";
+import { BookForm, StudentForm } from "./Form";
 
 export {
   ContainedActionBtn,
@@ -30,4 +31,6 @@ export {
   InputTextVisibility,
   ModalProvider,
   PrimaryCard,
+  BookForm,
+  StudentForm,
 };
