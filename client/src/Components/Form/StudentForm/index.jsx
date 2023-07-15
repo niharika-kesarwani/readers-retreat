@@ -99,7 +99,7 @@ const StudentForm = (props) => {
       </div>
       <div className="flex gap-3">
         <ContainedActionBtn
-          actionText={props.isEditStudent ? "EDIT" : "ADD"}
+          actionText={props.isEditStudent ? "EDIT STUDENT" : "ADD STUDENT"}
           className="basis-1/2"
           actionType="submit"
           actionHandler={(event) => {

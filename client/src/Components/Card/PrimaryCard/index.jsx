@@ -106,9 +106,11 @@ const PrimaryCard = (props) => {
       }
     >
       <div className="flex flex-col gap-3 p-4">
-        <div className="flex justify-between rounded-md bg-100 p-2">
+        <div className="flex flex-col justify-start gap-2 rounded-md bg-100 p-2">
           <span>Name</span>
-          <span className="capitalize">{props.name}</span>
+          <p className="rounded-md bg-50 p-2 text-sm capitalize">
+            {props.name}
+          </p>
         </div>
         {isStudent ? (
           <div className="flex justify-between rounded-md bg-100 p-2">
@@ -116,9 +118,11 @@ const PrimaryCard = (props) => {
             <span className="capitalize">{props.rollNumber}</span>
           </div>
         ) : (
-          <div className="flex justify-between rounded-md bg-100 p-2">
+          <div className="flex flex-col justify-start gap-2 rounded-md bg-100 p-2">
             <span>Author</span>
-            <span className="capitalize">{props.author}</span>
+            <span className="rounded-md bg-50 p-2 text-sm capitalize">
+              {props.author}
+            </span>
           </div>
         )}
         {isStudent ? (
@@ -127,9 +131,11 @@ const PrimaryCard = (props) => {
             <span className="capitalize">{props.email}</span>
           </div>
         ) : (
-          <div className="flex justify-between rounded-md bg-100 p-2">
+          <div className="flex flex-col justify-start gap-2 rounded-md bg-100 p-2">
             <span>Description</span>
-            <span className="capitalize">{props.description}</span>
+            <p className="rounded-md bg-50 p-2 text-sm capitalize">
+              {props.description}
+            </p>
           </div>
         )}
         {isStudent ? (

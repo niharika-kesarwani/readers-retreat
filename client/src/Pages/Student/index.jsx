@@ -40,19 +40,27 @@ const Student = () => {
       <div className="flex w-full flex-col gap-8 px-4 py-4 md:flex-row xl:px-0">
         <ul
           className={
-            data.students.length == 0 ? `flex w-full` : `card-container w-full`
+            data.students.length == 0
+              ? `flex w-full`
+              : `card-container w-full justify-items-center`
           }
         >
           {data.students.length !== 0 ? (
-            data.students.map((currentStudent) => {
-              return (
-                <PrimaryCard
-                  key={currentStudent.id}
-                  {...currentStudent}
-                  isStudent
-                />
-              );
-            })
+            studentsData.length ? (
+              studentsData.map((currentStudent) => {
+                return (
+                  <PrimaryCard
+                    key={currentStudent.id}
+                    {...currentStudent}
+                    isStudent
+                  />
+                );
+              })
+            ) : (
+              <p className="text-xl">
+                No Student with name/email of <strong>{inputText}</strong> found
+              </p>
+            )
           ) : (
             <EmptyCard
               addBtnText="Add Students"

@@ -97,7 +97,7 @@ const BookForm = (props) => {
       </div>
       <div className="flex gap-3">
         <ContainedActionBtn
-          actionText="ADD BOOK"
+          actionText={`${isEditBook ? "EDIT BOOK" : "ADD BOOK"}`}
           className="basis-1/2"
           actionType="submit"
         />

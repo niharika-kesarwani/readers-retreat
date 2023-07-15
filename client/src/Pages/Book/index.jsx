@@ -41,13 +41,22 @@ const Book = () => {
       <div className="flex w-full flex-col gap-8 px-4 py-4 md:flex-row xl:px-0">
         <ul
           className={
-            data.books.length == 0 ? `flex w-full` : `card-container w-full`
+            data.books.length == 0
+              ? `flex w-full`
+              : `card-container w-full justify-items-center`
           }
         >
           {data.books.length !== 0 ? (
-            data.books.map((currentBook) => {
-              return <PrimaryCard key={currentBook.id} {...currentBook} />;
-            })
+            booksData.length ? (
+              booksData.map((currentBook) => {
+                return <PrimaryCard key={currentBook.id} {...currentBook} />;
+              })
+            ) : (
+              <p className="text-xl">
+                No Book with title/author/description of{" "}
+                <strong>{inputText}</strong> found
+              </p>
+            )
           ) : (
             <EmptyCard
               addBtnText="Add Books"
