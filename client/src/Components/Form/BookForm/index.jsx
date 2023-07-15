@@ -5,12 +5,18 @@ import {
   ContainedActionBtn,
   OutlinedActionBtn,
 } from "../../../Components";
-import { addBookMutation, getBooksQuery } from "../../../queries/queries";
+import {
+  addBookMutation,
+  getBooksQuery,
+  updateBookMutation,
+} from "../../../queries/queries";
 import { useMutation } from "@apollo/client";
 
 const BookForm = (props) => {
   const [addBook, { data, loading, error }] = useMutation(addBookMutation);
   const { isEditBook, closeBookForm } = props;
+
+  const [updateBook] = useMutation(updateBookMutation);
 
   // BOOK INPUT DATA:
   const [bookData, setBookData] = useState({
@@ -34,6 +40,15 @@ const BookForm = (props) => {
     event.stopPropagation();
     console.log("here", { bookData });
     if (isEditBook) {
+      updateBook({
+        variables: {
+          updateBookId: bookData.bookCode,
+          updateBookName: bookData.bookTitle,
+          updateBookAuthor: bookData.bookAuthor,
+          updateBookDescription: bookData.bookDescription,
+        },
+        refetchQueries: [{ query: getBooksQuery }],
+      });
       props.closeEdit();
     } else {
       addBook({
@@ -76,6 +91,7 @@ const BookForm = (props) => {
             inputTextType="text"
             inputTextHandle={handleBookData}
             inputTextValue={bookData.bookCode}
+            isDisabled={true}
           />
         </InputTextLabel>
       </div>

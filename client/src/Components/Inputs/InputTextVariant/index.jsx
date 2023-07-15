@@ -8,6 +8,7 @@ const InputTextVariant = (props) => {
     inputTextPlaceholder,
     inputTextHandle,
     className,
+    isDisabled,
   } = props;
 
   const classes =
@@ -21,6 +22,8 @@ const InputTextVariant = (props) => {
       placeholder={inputTextPlaceholder}
       onChange={inputTextHandle}
       className={classes}
+      disabled={isDisabled}
+      style={{ cursor: isDisabled && "not-allowed" }}
       required
     />
   );
