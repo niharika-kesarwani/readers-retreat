@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @media (min-width: 656px) {
   .primary-card-index {
     transition: transform 0.5s;
@@ -23,14 +22,4 @@
     transition: transform 0.5s;
     transform: scale(6);
   }
-=======
-.primary-card-index {
-  transition: transform 0.5s;
-  opacity: 0.4;
-}
-
-.primary-card:hover .primary-card-index {
-  transition: transform 0.5s;
-  transform: scale(4.5);
->>>>>>> 817639b87c34a4a80bb5ce678b68358c565bb036
 }
