@@ -2,6 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ContainedActionBtn } from "../Actions";
 
+import { ContainedActionBtn } from "../Actions";
+import { useNavigate } from "react-router-dom";
+
 const EmptyCard = (props) => {
   const { navigate } = useNavigate();
   const { emptyCardUrl, emptyCardTitle, emptyCardDescription, addBtnText } =
