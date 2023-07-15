@@ -6,11 +6,16 @@ import {
   ContainedActionBtn,
   OutlinedActionBtn,
 } from "../../../Components";
-import { addStudentMutation, getStudentsQuery } from "../../../queries/queries";
+import {
+  addStudentMutation,
+  getStudentsQuery,
+  updateStudentMutation,
+} from "../../../queries/queries";
 import { useMutation } from "@apollo/client";
 
 const StudentForm = (props) => {
   const [addStudent] = useMutation(addStudentMutation);
+  const [updateStudent] = useMutation(updateStudentMutation);
   const { closeStudentForm } = props;
 
   // STUDENT INPUT DATA:
@@ -21,6 +26,7 @@ const StudentForm = (props) => {
     studentNumber: props?.isEditStudent ? props.phoneNo : "",
   });
 
+  // console.log("here", { id: props.id, ...studentData });
   // HANDLE STUDENT DATA:
   const handleStudentData = (event) => {
     const { name, value } = event.target;
@@ -35,6 +41,16 @@ const StudentForm = (props) => {
     event.preventDefault();
     console.log(studentData);
     if (props.isEditStudent) {
+      updateStudent({
+        variables: {
+          updateStudentId: props.id,
+          updateStudentRollNo: studentData.studentId,
+          updateStudentName: studentData.studentName,
+          updateStudentEmail: studentData.studentEmail,
+          updateStudentPhoneNo: studentData.studentNumber,
+        },
+        refetchQueries: [{ query: getStudentsQuery }],
+      });
       props.closeEdit();
     } else {
       addStudent({
