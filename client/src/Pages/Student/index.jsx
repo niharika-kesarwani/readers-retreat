@@ -59,6 +59,7 @@ const Student = () => {
             )
           ) : (
             <EmptyCard
+              addBtnText="Add Students"
               emptyCardTitle="studentEmpty"
               emptyCardDescription="No Student Data"
               emptyCardUrl="https://res.cloudinary.com/duqsyuriy/image/upload/v1689417730/NoStudent_xzizpm.svg"

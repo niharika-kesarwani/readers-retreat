@@ -49,7 +49,7 @@ const PrimaryCard = (props) => {
           </h3>
           <div className="absolute bottom-[12px] right-[12px] flex gap-2">
             <ModalProvider
-              modalTitle="EDIT"
+              modalTitle={`EDIT ${isStudent ? "STUDENT" : "BOOK"}`}
               isOpen={isEditOpen}
               closeModal={editClose}
               modalBtnVariant={

@@ -40,12 +40,12 @@ const Header = () => {
               />
               <TextActionLink
                 actionText="Students"
-                actionLink="/"
+                actionLink="/students"
                 className="px-2 py-1"
               />
               <TextActionLink
                 actionText="Books"
-                actionLink="/"
+                actionLink="/books"
                 className="px-2 py-1"
               />
             </div>
