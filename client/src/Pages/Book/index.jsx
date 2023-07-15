@@ -4,7 +4,7 @@ import { graphql } from "@apollo/client/react/hoc";
 import { getBooksQuery } from "../../queries/queries";
 import "./Book.css";
 import PageContainer from "../../Layouts/PageContainer";
-import { PrimaryCard, EmptyCard } from "../../Components";
+import { PrimaryCard, EmptyCard, Loader } from "../../Components";
 import InputSearch from "../../Components/Inputs/InputSearch";
 
 const Book = () => {
@@ -25,7 +25,11 @@ const Book = () => {
   }, [data, inputText]);
 
   if (loading) {
-    return <div>Loading books... </div>;
+    return (
+      <div className="w-full">
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
@@ -37,22 +41,13 @@ const Book = () => {
       <div className="flex w-full flex-col gap-8 px-4 py-4 md:flex-row xl:px-0">
         <ul
           className={
-            data.books.length == 0
-              ? `flex w-full`
-              : `card-container w-full justify-items-center`
+            data.books.length == 0 ? `flex w-full` : `card-container w-full`
           }
         >
           {data.books.length !== 0 ? (
-            booksData.length ? (
-              booksData.map((currentBook) => {
-                return <PrimaryCard key={currentBook.id} {...currentBook} />;
-              })
-            ) : (
-              <p className="text-xl">
-                No Book with title/author/description of{" "}
-                <strong>{inputText}</strong> found
-              </p>
-            )
+            data.books.map((currentBook) => {
+              return <PrimaryCard key={currentBook.id} {...currentBook} />;
+            })
           ) : (
             <EmptyCard
               emptyCardTitle="bookEmpty"

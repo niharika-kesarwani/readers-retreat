@@ -4,7 +4,7 @@ import { graphql } from "@apollo/client/react/hoc";
 import { getStudentsQuery } from "../../queries/queries";
 import "./Student.css";
 import PageContainer from "../../Layouts/PageContainer";
-import { PrimaryCard, EmptyCard } from "../../Components";
+import { PrimaryCard, EmptyCard, Loader } from "../../Components";
 import InputSearch from "../../Components/Inputs/InputSearch";
 
 const Student = () => {
@@ -24,7 +24,11 @@ const Student = () => {
   }, [data, inputText]);
 
   if (loading) {
-    return <div>Loading students... </div>;
+    return (
+      <div className="w-full">
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {
@@ -36,27 +40,19 @@ const Student = () => {
       <div className="flex w-full flex-col gap-8 px-4 py-4 md:flex-row xl:px-0">
         <ul
           className={
-            data.students.length == 0
-              ? `flex w-full`
-              : `card-container w-full justify-items-center`
+            data.students.length == 0 ? `flex w-full` : `card-container w-full`
           }
         >
           {data.students.length !== 0 ? (
-            studentsData.length ? (
-              studentsData.map((currentStudent) => {
-                return (
-                  <PrimaryCard
-                    key={currentStudent.id}
-                    {...currentStudent}
-                    isStudent
-                  />
-                );
-              })
-            ) : (
-              <p className="text-xl">
-                No Student with name/email of <strong>{inputText}</strong> found
-              </p>
-            )
+            data.students.map((currentStudent) => {
+              return (
+                <PrimaryCard
+                  key={currentStudent.id}
+                  {...currentStudent}
+                  isStudent
+                />
+              );
+            })
           ) : (
             <EmptyCard
               emptyCardTitle="studentEmpty"
