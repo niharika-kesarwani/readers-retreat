@@ -14,10 +14,16 @@ import {
 import PageContainer from "../../Layouts/PageContainer";
 import StudentIcon from "../../Asset/Home/StudentIcon.svg";
 import BookIcon from "../../Asset/Home/BookIcon.svg";
-import { addBookMutation, getBooksQuery } from "../../queries/queries";
+import {
+  addBookMutation,
+  addStudentMutation,
+  getBooksQuery,
+  getStudentsQuery,
+} from "../../queries/queries";
 
 const Home = () => {
   const [addBook, { data, loading, error }] = useMutation(addBookMutation);
+  const [addStudent] = useMutation(addStudentMutation);
 
   // ADD STUDENT MODAL:
   const [isAddStudentModalOpen, setIsAddStudentModalOpen] = useState(false);
@@ -66,6 +72,10 @@ const Home = () => {
     event.preventDefault();
     console.log(studentData);
     closeAddStudentModal();
+    addStudent({
+      variables: studentData,
+      refetchQueries: [{ query: getStudentsQuery }],
+    });
   };
 
   // HANDLE ADD BOOK:

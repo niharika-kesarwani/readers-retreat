@@ -42,4 +42,26 @@ const addBookMutation = gql`
   }
 `;
 
-export { getBooksQuery, getStudentsQuery, addBookMutation };
+const addStudentMutation = gql`
+  mutation (
+    $studentId: String!
+    $studentName: String!
+    $studentEmail: String!
+    $studentNumber: String!
+  ) {
+    addStudent(
+      rollNumber: $studentId
+      name: $studentName
+      email: $studentEmail
+      phoneNo: $studentNumber
+    ) {
+      id
+      rollNumber
+      name
+      email
+      phoneNo
+    }
+  }
+`;
+
+export { getBooksQuery, getStudentsQuery, addBookMutation, addStudentMutation };
