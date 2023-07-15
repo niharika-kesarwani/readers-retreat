@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import {
   SecondaryContainer,
@@ -12,8 +14,11 @@ import {
 import PageContainer from "../../Layouts/PageContainer";
 import StudentIcon from "../../Asset/Home/StudentIcon.svg";
 import BookIcon from "../../Asset/Home/BookIcon.svg";
+import { addBookMutation, getBooksQuery } from "../../queries/queries";
 
 const Home = () => {
+  const [addBook, { data, loading, error }] = useMutation(addBookMutation);
+
   // ADD STUDENT MODAL:
   const [isAddStudentModalOpen, setIsAddStudentModalOpen] = useState(false);
   const openAddStudentModal = () => setIsAddStudentModalOpen(true);
@@ -68,6 +73,10 @@ const Home = () => {
     event.preventDefault();
     console.log(bookData);
     closeAddBookModal();
+    addBook({
+      variables: bookData,
+      refetchQueries: [{ query: getBooksQuery }],
+    });
   };
 
   return (
