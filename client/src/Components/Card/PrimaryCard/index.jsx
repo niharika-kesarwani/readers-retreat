@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import "./PrimaryCard.css";
 import { TruncUtil } from "../../../Utils";
 import ModalProvider from "../../ModalProvider";
@@ -85,6 +86,7 @@ const PrimaryCard = (props) => {
                     variables: { deleteStudentId: props.id },
                     refetchQueries: [{ query: getStudentsQuery }],
                   });
+                  toast.success(`Deleted ${props.name} successfully!`);
                 }}
               >
                 <DeleteIcon sx={{ fontSize: "16px" }} />
@@ -98,6 +100,7 @@ const PrimaryCard = (props) => {
                     variables: { deleteBookId: props.id },
                     refetchQueries: [{ query: getBooksQuery }],
                   });
+                  toast.success(`Deleted ${props.name} successfully!`);
                 }}
               >
                 <DeleteIcon sx={{ fontSize: "16px" }} />
