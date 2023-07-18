@@ -55,7 +55,7 @@ const Home = () => {
               <button
                 onClick={openAddBookModal}
                 className="h-[300px] w-[300px] rounded-full bg-[#ddd] transition-all active:scale-95"
-                title="Add Student"
+                title="Add Book"
               >
                 <img
                   src={BookIcon}

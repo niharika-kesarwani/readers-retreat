@@ -16,15 +16,15 @@ const Header = () => {
   }, [showMenu]);
 
   return (
-    <header className="flex h-[8vh] border-b p-4 xl:px-0">
-      <div className="mx-auto flex w-full max-w-[1280px] justify-between">
+    <header className="flex border-b p-4 xl:px-0">
+      <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between">
         <h1
           onClick={() => navigate("/")}
           className="text-xl font-semibold uppercase hover:cursor-pointer"
         >
           reader's retreat
         </h1>
-        <nav className="max-[400px]:hidden">
+        <nav className="flex max-[400px]:hidden md:block">
           <UnderActionLink actionText="Home" actionLink="/" />
           <UnderActionLink actionText="Students" actionLink="/students" />
           <UnderActionLink actionText="Books" actionLink="/books" />

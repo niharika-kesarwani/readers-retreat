@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ContainedActionBtn } from "../Actions";
 
 const EmptyCard = (props) => {
-  const { navigate } = useNavigate();
+  const navigate = useNavigate();
   const { emptyCardUrl, emptyCardTitle, emptyCardDescription, addBtnText } =
     props;
 
