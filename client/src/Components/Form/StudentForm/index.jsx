@@ -77,7 +77,7 @@ const StudentForm = (props) => {
         <InputTextLabel labelText="ID Number">
           <InputTextVariant
             inputTextName="studentId"
-            inputTextType="text"
+            inputTextType="number"
             inputTextHandle={handleStudentData}
             inputTextValue={studentData.studentId}
           />

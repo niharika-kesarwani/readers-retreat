@@ -88,15 +88,17 @@ const BookForm = (props) => {
             inputTextValue={bookData.bookDescription}
           />
         </InputTextLabel>
-        <InputTextLabel labelText="Code">
-          <InputTextVariant
-            inputTextName="bookCode"
-            inputTextType="text"
-            inputTextHandle={handleBookData}
-            inputTextValue={bookData.bookCode}
-            isDisabled={true}
-          />
-        </InputTextLabel>
+        {isEditBook && (
+          <InputTextLabel labelText="Code">
+            <InputTextVariant
+              inputTextName="bookCode"
+              inputTextType="text"
+              inputTextHandle={handleBookData}
+              inputTextValue={bookData.bookCode}
+              isDisabled={true}
+            />
+          </InputTextLabel>
+        )}
       </div>
       <div className="flex gap-3">
         <ContainedActionBtn
